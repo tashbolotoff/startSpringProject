@@ -13,5 +13,5 @@ public interface UserRoleService {
 
     UserRole update(UserRole userRole);
 
-    UserRole getById(UUID id);
+    UserRole getById(Long id);
 }

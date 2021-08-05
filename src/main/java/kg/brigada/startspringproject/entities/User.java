@@ -19,7 +19,7 @@ public class User extends  Audit<String>{
 
     @Id
     @GeneratedValue
-    UUID id;
+    Long id;
 
     @ManyToOne
     UserRole userRole;

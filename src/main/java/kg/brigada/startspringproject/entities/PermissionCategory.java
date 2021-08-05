@@ -20,7 +20,7 @@ public class PermissionCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "permission_category_id")
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String name;

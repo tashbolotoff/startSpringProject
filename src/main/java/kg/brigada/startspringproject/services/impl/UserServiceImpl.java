@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getById(UUID uuid) {
+    public User getById(Long uuid) {
         return userRepo.getById(uuid);
     }
 
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User changeActiveStatus(UUID uuid, Boolean active) {
+    public User changeActiveStatus(Long uuid, Boolean active) {
         return userRepo.findById(uuid).map(newUser -> {
             newUser.setIsActive(active);
             return userRepo.save(newUser);

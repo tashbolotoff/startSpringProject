@@ -18,7 +18,7 @@ import java.util.UUID;
 public class UserRole extends  Audit<String>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    UUID id;
+    Long id;
 
     String name;
 

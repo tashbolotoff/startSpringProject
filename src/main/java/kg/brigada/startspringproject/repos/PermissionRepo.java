@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface PermissionRepo extends JpaRepository<Permission, UUID> {
+public interface PermissionRepo extends JpaRepository<Permission, Long> {
 }

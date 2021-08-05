@@ -11,11 +11,11 @@ public interface UserService {
 
     List<User> findAll();
 
-    User getById(UUID uuid);
+    User getById(Long uuid);
 
     User update(User user);
 
-    User changeActiveStatus(UUID uuid, Boolean active);
+    User changeActiveStatus(Long uuid, Boolean active);
 
     User getByUsername(String username);
 }

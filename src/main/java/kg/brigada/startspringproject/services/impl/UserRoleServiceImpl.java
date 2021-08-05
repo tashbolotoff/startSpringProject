@@ -31,7 +31,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public UserRole getById(UUID id) {
+    public UserRole getById(Long id) {
         return userRoleRepo.getById(id);
     }
 }
