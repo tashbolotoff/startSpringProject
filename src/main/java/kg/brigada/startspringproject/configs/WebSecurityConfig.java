@@ -40,15 +40,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers(
-                        "/api/v1/authenticate",
-                        "/",
-                        "/vendors/*****",
-                        "/build/*****")
+                .antMatchers("/",
+                        "/css/*",
+                        "/fonts/*",
+                        "/img/**",
+                        "/js/*",
+                        "/src/**",
+                        "/build/**",
+                        "/loginAssets/css/*",
+                        "/loginAssets/js/*")
                 .permitAll()
-                .antMatchers(HttpMethod.GET, "/admin/index").permitAll()
-//                .antMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/v1/authenticate").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

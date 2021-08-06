@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/loginAssets/logos/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/loginAssets/logos/favicon-16x16.png}">
+
+    <title>Авторизация</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/loginAssets/css/style.css}">
+    <script src="https://kit.fontawesome.com/7083e2b59a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="registration-form">
+        <form method="post" action="/login">
+            <div class="form-icon">
+                <span><i class="icon icon-user"></i></span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item" id="username" name="username" placeholder="Логин">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control item" id="password" name="password" placeholder="Пароль">
+            </div>
+            <div class="form-group check">
+                <input type="checkbox" class="form-check-input" id="check" onclick="myFunction()"><label for="check">Показать пароль</label>
+            </div>
+<!--            <div class="form-group">-->
+<!--                <input type="text" class="form-control item" id="email" placeholder="Email">-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <input type="text" class="form-control item" id="phone-number" placeholder="Phone Number">-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <input type="text" class="form-control item" id="birth-date" placeholder="Birth Date">-->
+<!--            </div>-->
+            <div class="form-group">
+                <button type="submit" class="btn btn-block create-account">Войти</button>
+            </div>
+        </form>
+<!--        <div class="social-media">-->
+<!--            <h5>Sign up with social media</h5>-->
+<!--            <div class="social-icons">-->
+<!--                <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>-->
+<!--                <a href="#"><i class="icon-social-google" title="Google"></i></a>-->
+<!--                <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script th:src="@{/loginAssets/js/script.js}"></script>
+    <script type='text/javascript'>
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>
