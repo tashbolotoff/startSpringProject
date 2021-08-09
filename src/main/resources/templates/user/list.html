@@ -1,84 +1,65 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
 <head th:replace="fragments :: head"></head>
 
 <body>
-<div class="wrapper">
-    <nav th:replace="fragments :: leftmenu"></nav>
+<div id="app">
+    <div th:replace="fragments :: leftmenu"></div>
+    <div id="main" class='layout-navbar'>
+        <header th:replace="fragments :: header"></header>
 
-    <div class="main">
-        <nav th:replace="fragments :: navbar"></nav>
-        <div class="content">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Contextual Classes</h5>
-                    <h6 class="card-subtitle text-muted">Use contextual classes to color table rows or individual cells.</h6>
+
+        <div id="main-content">
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Пользователи системы</h3>
+                        </div>
+                    </div>
                 </div>
-                <table class="table" id="dataTable">
-                    <thead>
-                    <tr>
-                        <th style="width:40%;">Name</th>
-                        <th style="width:25%">Phone Number</th>
-                        <th class="d-none d-md-table-cell" style="width:25%">Date of Birth</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Vanessa Tucker</td>
-                        <td>864-348-0485</td>
-                        <td class="d-none d-md-table-cell">June 21, 1961</td>
-                        <td class="table-action">
-                            <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                            <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr class="table-primary">
-                        <td>William Harris</td>
-                        <td>914-939-2458</td>
-                        <td class="d-none d-md-table-cell">May 15, 1948</td>
-                        <td class="table-action">
-                            <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                            <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sharon Lessman</td>
-                        <td>704-993-5435</td>
-                        <td class="d-none d-md-table-cell">September 14, 1965</td>
-                        <td class="table-action">
-                            <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                            <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr class="table-success">
-                        <td>Christina Mason</td>
-                        <td>765-382-8195</td>
-                        <td class="d-none d-md-table-cell">April 2, 1971</td>
-                        <td class="table-action">
-                            <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                            <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Robin Schneiders</td>
-                        <td>202-672-1407</td>
-                        <td class="d-none d-md-table-cell">October 12, 1966</td>
-                        <td class="table-action">
-                            <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                            <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <section class="section">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <table class="table table-striped" id="dataTable">
+                                <thead>
+                                <tr>
+                                    <th>Логин</th>
+                                    <th>ФИО</th>
+                                    <th>Email</th>
+                                    <th>Телефон</th>
+                                    <th>Статус</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="user : ${users}">
+                                    <td th:text="${user.getUsername()}"></td>
+                                    <td th:text="${user.getFirstName() + ' ' + user.getLastName() }"></td>
+                                    <td th:text="${user.getEmail()}"></td>
+                                    <td th:text="${user.getPhone()}"></td>
+                                    <td>
+                                        <span class="badge bg-success" th:text="${user.getIsActive() ? 'Активно' : 'Не активно'}"></span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
             </div>
+
+            <footer th:replace="fragments :: footer"></footer>
         </div>
-        </div>
-        <footer th:replace="fragments :: footer"></footer>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/settingsDataTables.js}"></script>
+<div th:replace="fragments :: HPscripts"></div>
+<div th:replace="fragments :: DataTableScripts"></div>
 </body>
+
 </html>

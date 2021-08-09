@@ -29,4 +29,16 @@ public class User extends  Audit<String>{
     String password;
 
     Boolean isActive;
+
+    String lastName;
+
+    String firstName;
+
+    String middleName;
+
+    String email;
+
+    String phone;
+
+
 }

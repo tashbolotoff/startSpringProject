@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+<head th:replace="fragments :: head"></head>
+<body>
+    <div id="error">
+        
+
+<div class="error-page container">
+    <div class="col-md-8 col-12 offset-md-2">
+        <img class="img-error" th:src="@{/images/samples/error-404.png}" alt="Not Found">
+        <div class="text-center">
+            <h1 class="error-title">НЕ НАЙДЕН</h1>
+            <p class='fs-5 text-gray-600'>Страница, которую вы ищете, не найдена.</p>
+            <a href="/" class="btn btn-lg btn-outline-primary mt-3">Главная страница</a>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+</body>
+
+</html>

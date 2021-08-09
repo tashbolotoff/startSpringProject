@@ -14,10 +14,10 @@ public class MvcConfig implements WebMvcConfigurer {
 
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/notFound").setViewName("error-404");
-        registry.addViewController("/forbidden").setViewName("error-403");
-        registry.addViewController("/servererror").setViewName("error-500");
-        registry.addViewController("/notAllowed").setViewName("error-405");
+        registry.addViewController("/notFound").setViewName("errors/error-404");
+        registry.addViewController("/forbidden").setViewName("errors/error-403");
+        registry.addViewController("/servererror").setViewName("errors/error-500");
+        registry.addViewController("/notAllowed").setViewName("errors/error-405");
     }
 
     @Bean

@@ -94,6 +94,11 @@ public class Bootstrap implements CommandLineRunner {
                 .password(passwordEncoder.encode("123"))
                 .isActive(true)
                 .userRole(userRoleAdmin)
+                .email("brigada@brigada.kg")
+                .phone("+996(555)55-55-55")
+                .firstName("Админов")
+                .lastName("Админ")
+                .middleName("Админович")
                 .build();
         userRepo.save(userAdmin);
     }
