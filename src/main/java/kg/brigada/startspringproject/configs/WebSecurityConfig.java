@@ -41,12 +41,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/",
-                        "/css/*",
-                        "/fonts/*",
-                        "/img/**",
-                        "/js/*",
-                        "/src/**",
-                        "/build/**",
+                        "/css/**",
+                        "/images/**",
+                        "/js/**",
+                        "/vendors/****",
                         "/loginAssets/css/*",
                         "/loginAssets/js/*")
                 .permitAll()

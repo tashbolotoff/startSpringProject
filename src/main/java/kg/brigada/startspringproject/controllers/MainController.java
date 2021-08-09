@@ -32,8 +32,6 @@ public class MainController {
     public String getMainPage(HttpServletRequest request) {
         if (request.isUserInRole("ROLE_ADMIN")) {
             return "redirect:/admin/user/list";
-        } else if (request.isUserInRole("ROLE_CURATOR")) {
-            return "redirect:/notification/list";
         }
         return "redirect:/";
     }
