@@ -20,4 +20,9 @@ public class AdminController {
         return "user/list";
     }
 
+    @GetMapping("/user/add")
+    public String getUsetForm(){
+        return "user/form";
+    }
+
 }

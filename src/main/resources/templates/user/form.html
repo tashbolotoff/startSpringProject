@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+<head th:replace="fragments :: head"></head>
+
+<body>
+<div id="app">
+    <div th:replace="fragments :: leftmenu"></div>
+    <div id="main" class='layout-navbar'>
+        <header th:replace="fragments :: header"></header>
+
+
+        <div id="main-content">
+
+
+
+                <div class="col-md-12 col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Форма редактирования данных</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <form class="form form-vertical">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group has-icon-left">
+                                                    <label>Логин</label>
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Логин" name="username">
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-person"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group has-icon-left">
+                                                    <label>Пароль</label>
+                                                    <div class="position-relative">
+                                                        <input type="password" class="form-control"
+                                                               placeholder="Пароль"
+                                                               name="password">
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-lock"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group has-icon-left">
+                                                    <label>Имя</label>
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Имя"
+                                                               name="lastName">
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-person"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group has-icon-left">
+                                                    <label>Фамилия</label>
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Фамилия"
+                                                            name="firstName">
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-person"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group has-icon-left">
+                                                    <label>Отчество</label>
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Отчество"
+                                                                name="middleName">
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-person"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group has-icon-left">
+                                                    <label>Email</label>
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" placeholder="Email"
+                                                               name="email">
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-envelope"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group has-icon-left">
+                                                    <label>Телефон</label>
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" placeholder="Телефон"
+                                                               name="phone">
+                                                        <div class="form-control-icon">
+                                                            <i class="bi bi-phone"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary me-1 mb-1">Сохранить</button>
+                                                <button type="reset"
+                                                        class="btn btn-light-secondary me-1 mb-1">Сбросить
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <footer th:replace="fragments :: footer"></footer>
+        </div>
+
+    </div>
+
+<div th:replace="fragments :: HPscripts"></div>
+</body>
+</html>
