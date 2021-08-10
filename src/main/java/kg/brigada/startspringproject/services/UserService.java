@@ -15,7 +15,7 @@ public interface UserService {
 
     User update(User user);
 
-    User changeActiveStatus(Long uuid, Boolean active);
+    User changeActiveStatus(Long uuid);
 
     User getByUsername(String username);
 }

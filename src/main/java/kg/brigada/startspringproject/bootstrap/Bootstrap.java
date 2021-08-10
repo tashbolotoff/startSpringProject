@@ -86,6 +86,17 @@ public class Bootstrap implements CommandLineRunner {
         }
         userRoleRepo.save(userRoleAdmin);
 
+        UserRole userRoleTEST = UserRole.builder()
+                .name("ROLE_TEST")
+                .build();
+        ArrayList<Permission> permissionArrayList2 = new ArrayList<>();
+        permissionArrayList2.add(permissionAdmin);
+        userRoleTEST.setPermissions(permissionArrayList2);
+        if (userRoleTEST.getPermissions() != null) {
+            permissionArrayList.addAll(userRoleTEST.getPermissions());
+        }
+        userRoleRepo.save(userRoleTEST);
+
         /**
          * Users
          **/

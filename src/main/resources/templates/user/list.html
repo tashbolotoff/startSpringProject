@@ -16,20 +16,22 @@
 
             <div class="page-heading">
                 <div class="page-title">
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col-12 col-md-6 order-md-1 order-last">
                             <h3>Пользователи системы</h3>
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                                <a href="/admin/user/add" class="btn btn-primary">Добавить пользователя</a>
+                                <button type="button" class="btn btn-outline-success rounded-pill"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#inlineForm">Добавить нового пользователя
+                                </button>
                             </nav>
                         </div>
                     </div>
                 </div>
                 <section class="section">
                     <div class="card">
-
                         <div class="card-body">
                             <table class="table table-striped" id="dataTable">
                                 <thead>
@@ -39,6 +41,7 @@
                                     <th>Email</th>
                                     <th>Телефон</th>
                                     <th>Статус</th>
+                                    <th>Действия</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -48,8 +51,186 @@
                                     <td th:text="${user.getEmail()}"></td>
                                     <td th:text="${user.getPhone()}"></td>
                                     <td>
-                                        <span class="badge bg-success" th:text="${user.getIsActive() ? 'Активно' : 'Не активно'}"></span>
+                                        <span th:if="${user.getIsActive()}" class="badge bg-success">Активно</span>
+                                        <span th:if="${!user.getIsActive()}" class="badge bg-danger">Не активно</span>
                                     </td>
+                                    <td>
+
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <!-- Изменить -->
+                                            <a type="button" class="btn btn-outline-success rounded-pill"
+                                               data-bs-toggle="modal"
+                                               th:data-bs-target="${'#inlineForm' + user.getId()}"><i
+                                                    style="display: flex"
+                                                    class="bi bi-pencil-square"></i></a>
+                                            <!-- Изменения статуса -->
+                                            <form action="/admin/user/changeStatus" method="post">
+                                                <input type="hidden" name="changeUserId" th:value="${user.getId()}">
+                                                <button type="submit"
+                                                        th:class="${user.getIsActive() ? 'btn btn-outline-danger rounded-pill' : 'btn btn-outline-success rounded-pill'}">
+                                                    <i th:if="${!user.getIsActive()}" style="display: flex"
+                                                       class="bi bi-check2-square"></i> <i th:if="${user.getIsActive()}"
+                                                                                           style="display: flex"
+                                                                                           class="bi bi-x-circle"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+
+                                    <!--Модальное окно с формой для редактрования-->
+                                    <div class="modal fade" th:id="${'inlineForm'+user.getId()}" tabindex="-1"
+                                         role="dialog"
+                                         aria-labelledby="myModalLabel33" aria-hidden="true">
+                                        <div class="modal-dialog"
+                                             role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Редактирования пользователя</h4>
+                                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <i data-feather="x"></i>
+                                                    </button>
+                                                </div>
+                                                <form action="/admin/user/update" method="post">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <input type="hidden" name="id" th:value="${user.getId()}">
+                                                            <div class="col-12">
+                                                                <div class="form-group has-icon-left">
+                                                                    <label>Логин</label>
+                                                                    <div class="position-relative">
+                                                                        <input type="text" class="form-control"
+                                                                               placeholder="Логин" name="username"
+                                                                               th:value="${user.getUsername()}"
+                                                                               disabled>
+                                                                        <div class="form-control-icon">
+                                                                            <i class="bi bi-person"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <div class="form-group has-icon-left">
+                                                                    <label>Пароль</label>
+                                                                    <div class="position-relative">
+                                                                        <input type="password" class="form-control"
+                                                                               placeholder="Пароль"
+                                                                               name="password">
+                                                                        <div class="form-control-icon">
+                                                                            <i class="bi bi-lock"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <div class="form-group has-icon-left">
+                                                                    <label>Роль</label>
+                                                                    <div class="position-relative">
+                                                                        <select class="form-select" name="userRole">
+                                                                            <option th:each="userRole : ${userRoles}"
+                                                                                    th:text="${userRole.getName()}"
+                                                                                    th:value="${userRole.getId()}"
+                                                                                    th:selected="${userRole.getId() == user.getUserRole().getId()}"></option>
+
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <div class="form-group has-icon-left">
+                                                                    <label>Имя</label>
+                                                                    <div class="position-relative">
+                                                                        <input type="text" class="form-control"
+                                                                               placeholder="Имя"
+                                                                               name="lastName"
+                                                                               th:value="${user.getLastName()}">
+                                                                        <div class="form-control-icon">
+                                                                            <i class="bi bi-person"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <div class="form-group has-icon-left">
+                                                                    <label>Фамилия</label>
+                                                                    <div class="position-relative">
+                                                                        <input type="text" class="form-control"
+                                                                               placeholder="Фамилия"
+                                                                               name="firstName"
+                                                                               th:value="${user.getFirstName()}">
+                                                                        <div class="form-control-icon">
+                                                                            <i class="bi bi-person"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <div class="form-group has-icon-left">
+                                                                    <label>Отчество</label>
+                                                                    <div class="position-relative">
+                                                                        <input type="text" class="form-control"
+                                                                               placeholder="Отчество"
+                                                                               name="middleName"
+                                                                               th:value="${user.getMiddleName()}">
+                                                                        <div class="form-control-icon">
+                                                                            <i class="bi bi-person"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <div class="form-group has-icon-left">
+                                                                    <label>Email</label>
+                                                                    <div class="position-relative">
+                                                                        <input type="text" class="form-control"
+                                                                               placeholder="Email"
+                                                                               name="email"
+                                                                               th:value="${user.getEmail()}">
+                                                                        <div class="form-control-icon">
+                                                                            <i class="bi bi-envelope"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group has-icon-left">
+                                                                    <label>Телефон</label>
+                                                                    <div class="position-relative">
+                                                                        <input type="text" class="form-control"
+                                                                               placeholder="Телефон"
+                                                                               name="phone"
+                                                                               th:value="${user.getPhone()}">
+                                                                        <div class="form-control-icon">
+                                                                            <i class="bi bi-phone"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12 d-flex justify-content-end">
+                                                                <button type="submit" class="btn btn-primary me-1 mb-1">
+                                                                    Сохранить
+                                                                </button>
+                                                                <button type="button" class="btn btn-light-secondary"
+                                                                        data-bs-dismiss="modal">
+                                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Отмена</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </tr>
                                 </tbody>
                             </table>
@@ -57,6 +238,147 @@
                     </div>
 
                 </section>
+
+
+                <!--Модальное окно с формой для создания -->
+                <div class="modal fade" id="inlineForm" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel33" aria-hidden="true">
+                    <div class="modal-dialog"
+                         role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel33">Добавление нового пользователя</h4>
+                                <button type="button" class="close" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                    <i data-feather="x"></i>
+                                </button>
+                            </div>
+                            <form action="/admin/user/add" method="post">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label>Логин</label>
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Логин" name="username">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-person"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label>Пароль</label>
+                                                <div class="position-relative">
+                                                    <input type="password" class="form-control"
+                                                           placeholder="Пароль"
+                                                           name="password">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-lock"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label>Роль</label>
+                                                <div class="position-relative">
+                                                    <select class="form-select" name="userRole">
+                                                        <option th:each="userRole : ${userRoles}"
+                                                                th:text="${userRole.getName()}"
+                                                                th:value="${userRole.getId()}"></option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label>Имя</label>
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Имя"
+                                                           name="lastName">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-person"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label>Фамилия</label>
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Фамилия"
+                                                           name="firstName">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-person"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label>Отчество</label>
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Отчество"
+                                                           name="middleName">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-person"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label>Email</label>
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control" placeholder="Email"
+                                                           name="email">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-envelope"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label>Телефон</label>
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control" placeholder="Телефон"
+                                                           name="phone">
+                                                    <div class="form-control-icon">
+                                                        <i class="bi bi-phone"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Сохранить</button>
+                                            <button type="button" class="btn btn-light-secondary"
+                                                    data-bs-dismiss="modal">
+                                                <i class="bx bx-x d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Отмена</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <footer th:replace="fragments :: footer"></footer>
