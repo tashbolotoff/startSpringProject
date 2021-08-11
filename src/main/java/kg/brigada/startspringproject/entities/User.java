@@ -24,6 +24,7 @@ public class User extends  Audit<String>{
     @ManyToOne
     UserRole userRole;
 
+    @Column(unique = true, nullable = false)
     String username;
 
     String password;

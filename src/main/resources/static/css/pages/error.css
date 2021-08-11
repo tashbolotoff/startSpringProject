@@ -1,5 +1,4 @@
 #error {
-  height: 100vh;
   background-color: #ebf3ff;
   padding-top: 5rem;
 }
@@ -9,4 +8,10 @@
 #error .error-title {
   font-size: 4rem;
   margin-top: 3rem;
+}
+
+@media screen and (max-height: 600px) {
+  #error .img-error {
+    width: 70vh;
+  }
 }
